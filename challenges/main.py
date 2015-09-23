@@ -75,12 +75,49 @@ def print_matrix_spiral():
     print ' '.join(map(str, result))
 
 
+
+def print_matrix_diagonal():
+    '''
+        Challenge4: Print matrix in diagonal order
+    Input:
+        0, 0, 0, 0, 0
+        0, 1, 2, 3, 4
+        0, 2, 4, 6, 8
+        0, 1, 2, 3, 4
+
+    Result:
+        0
+        0 0
+        0 1 0
+        0 2 2 0
+        1 4 3 0
+        2 6 4
+        3 8
+        4
+    '''
+    matrix = [[0, 0, 0, 0, 0], [0, 1, 2, 3, 4], [0, 2, 4, 6, 8], [0, 1, 2, 3, 4]]
+    result = []
+
+    COL = len(matrix[0])
+    ROW = len(matrix)
+    for line in range(ROW+COL):
+        start_col = max(0, line-ROW)
+        count = min(line, (COL-start_col), ROW);
+
+        for j in range(count):
+            result.append(matrix[min(ROW, line)-j-1][start_col+j])
+    print result
+
+
+
+
 def main():
     '''
     print_matrix_horz()
     print_matrix_vert()
-    '''
     print_matrix_spiral()
+    '''
+    print_matrix_diagonal()
 
 if __name__ == "__main__":
     main()
