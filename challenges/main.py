@@ -128,14 +128,50 @@ def quicksort(array):
         return array
 
 
+def qsort(array, start, end):
+	if start >= end:
+		return
+
+	pivot, left = start, start
+	right = end
+
+	while left < right:
+		while array[left] <= array[pivot]:
+			left += 1
+		while array[right] > array[pivot]:
+			right -= 1
+		if left < right:
+			# swap
+			array[left], array[right] = array[right], array[left]
+
+	# swap pivot & right (right now points to lower num)
+	array[right], array[pivot] = array[pivot], array[right]
+
+	# Apply recursive on either sides
+	qsort(array, start, right-1)
+	qsort(array, right+1, end)
+
+
+def quicksort_inplace():
+	"""
+	Quicksort - with no extra memory
+	"""
+	array=[12,4,5,6,7,3,1,15]
+	qsort(array, 0, len(array)-1)
+	print array
+
 def main():
     '''
     print_matrix_horz()
     print_matrix_vert()
     print_matrix_spiral()
     print_matrix_diagonal()
-    '''
+    
     print quicksort(array=[12,4,5,6,7,3,1,15])
+    '''
+    quicksort_inplace()
+
+
 
 if __name__ == "__main__":
     main()
