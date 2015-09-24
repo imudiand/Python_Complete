@@ -75,7 +75,6 @@ def print_matrix_spiral():
     print ' '.join(map(str, result))
 
 
-
 def print_matrix_diagonal():
     '''
         Challenge4: Print matrix in diagonal order
@@ -102,13 +101,31 @@ def print_matrix_diagonal():
     ROW = len(matrix)
     for line in range(ROW+COL):
         start_col = max(0, line-ROW)
-        count = min(line, (COL-start_col), ROW);
-
+        count = min(line, (COL-start_col), ROW)
         for j in range(count):
             result.append(matrix[min(ROW, line)-j-1][start_col+j])
     print result
 
+def quicksort(array):
+    """
+        Quicksort - with extra memory
+    """
+    less = []
+    equal = []
+    greater = []
 
+    if len(array) > 1:
+        pivot = array[0]
+        for x in array:
+            if x < pivot:
+                less.append(x)
+            elif x == pivot:
+                equal.append(x)
+            else:
+                greater.append(x)
+        return quicksort(less) + equal + quicksort(greater)
+    else:
+        return array
 
 
 def main():
@@ -116,8 +133,9 @@ def main():
     print_matrix_horz()
     print_matrix_vert()
     print_matrix_spiral()
-    '''
     print_matrix_diagonal()
+    '''
+    print quicksort(array=[12,4,5,6,7,3,1,15])
 
 if __name__ == "__main__":
     main()
