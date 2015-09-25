@@ -234,7 +234,30 @@ def regex_us_phone_nums():
 		if res:
 			print res.groups()
 
-		
+
+from functools import wraps
+def fib_cache(func):
+	cache = {}
+	@wraps(func)
+	def func_wrap(num):
+		res = cache.get(num, None)
+		if res:
+			return res
+		cache[num] = func(num)
+		return cache[num]
+	return func_wrap
+
+
+@fib_cache
+def cached_fib(num):
+	if num < 2:
+		return 1
+	fib1 = cached_fib(num-1)
+	fib2 = cached_fib(num-2)
+
+	print "Fib %d = %d" % (num, fib1+fib2)
+	return fib1+fib2
+
 def main():
     '''
     print_matrix_horz()
@@ -245,8 +268,10 @@ def main():
     quicksort_inplace()
     anagrams()
     regex_ip_address()
-    '''
     regex_us_phone_nums()
+    '''
+    print "Result = %d" % cached_fib(5)
+
 
 if __name__ == "__main__":
     main()
