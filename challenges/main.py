@@ -218,7 +218,23 @@ def regex_ip_address():
 			print "NOT IP"
 
 
+def regex_us_phone_nums():
+	"""
+		Match an US phone numbers
+		=========================
+	"""
+	nums = ["800-555-1212", "800 555 1212", "800.555.1212", "(800) 555-1212", "1-800-555-1212",
+			"800-555-1212-1234", "800-555-1212x1234", "800-555-1212 ext. 1234", "work 1-(800) 555.1212 #1234"]
 
+	pattern = r"(\d{3})\D*(\d{3})\D*(\d{4})\D*(\d*)$"
+	regex = re.compile(pattern)
+
+	for num in nums:
+		res = regex.search(num)
+		if res:
+			print res.groups()
+
+		
 def main():
     '''
     print_matrix_horz()
@@ -228,9 +244,9 @@ def main():
     print quicksort(array=[12,4,5,6,7,3,1,15])
     quicksort_inplace()
     anagrams()
-    '''
     regex_ip_address()
-
+    '''
+    regex_us_phone_nums()
 
 if __name__ == "__main__":
     main()
