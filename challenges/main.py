@@ -50,6 +50,7 @@ def print_top_right(matrix, x1, y1, x2, y2, result):
     if x2-x1 and y2-y1:
         print_bottom_left(matrix, x1, y1+1, x2-1, y2, result)
 
+
 def print_bottom_left(matrix, x1, y1, x2, y2, result):
     for x in range(x2, x1-1, -1):
         result.append(matrix[y2][x])
@@ -58,6 +59,7 @@ def print_bottom_left(matrix, x1, y1, x2, y2, result):
 
     if x2-x1 and y2-y1:
         print_top_right(matrix, x1+1, y1, x2, y2-1, result)
+
 
 def print_matrix_spiral():
     '''
@@ -106,6 +108,7 @@ def print_matrix_diagonal():
             result.append(matrix[min(ROW, line)-j-1][start_col+j])
     print result
 
+
 def quicksort(array):
     """
         Quicksort - with extra memory
@@ -129,36 +132,37 @@ def quicksort(array):
 
 
 def qsort(array, start, end):
-	if start >= end:
-		return
+    if start >= end:
+        return
 
-	pivot, left = start, start
-	right = end
+    pivot, left = start, start
+    right = end
 
-	while left < right:
-		while array[left] <= array[pivot]:
-			left += 1
-		while array[right] > array[pivot]:
-			right -= 1
-		if left < right:
-			# swap
-			array[left], array[right] = array[right], array[left]
+    while left < right:
+        while array[left] <= array[pivot]:
+            left += 1
+        while array[right] > array[pivot]:
+            right -= 1
+        if left < right:
+            # swap
+            array[left], array[right] = array[right], array[left]
 
-	# swap pivot & right (right now points to lower num)
-	array[right], array[pivot] = array[pivot], array[right]
+    # swap pivot & right (right now points to lower num)
+    array[right], array[pivot] = array[pivot], array[right]
 
-	# Apply recursive on either sides
-	qsort(array, start, right-1)
-	qsort(array, right+1, end)
+    # Apply recursive on either sides
+    qsort(array, start, right-1)
+    qsort(array, right+1, end)
 
 
 def quicksort_inplace():
-	"""
-	Quicksort - with no extra memory
-	"""
-	array=[12,4,5,6,7,3,1,15]
-	qsort(array, 0, len(array)-1)
-	print array
+    """
+    Quicksort - with no extra memory
+    """
+    array = [12, 4, 5, 6, 7, 3, 1, 15]
+    qsort(array, 0, len(array)-1)
+    print array
+
 
 def main():
     '''
@@ -166,11 +170,9 @@ def main():
     print_matrix_vert()
     print_matrix_spiral()
     print_matrix_diagonal()
-    
     print quicksort(array=[12,4,5,6,7,3,1,15])
     '''
     quicksort_inplace()
-
 
 
 if __name__ == "__main__":
