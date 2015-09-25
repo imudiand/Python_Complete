@@ -1,4 +1,4 @@
-
+import re
 
 def print_matrix_horz():
     '''
@@ -164,6 +164,42 @@ def quicksort_inplace():
     print array
 
 
+
+code = {
+        'a':2, 'b':3, 'c':5, 'd':7, 'e':11, 'f':13, 'g':17, 'h':19, 'i':23, 'j':29, 'k':31, 'l':37, 'm':41, 'n':43,
+        'o':47, 'p':53, 'q':59, 'r':61, 's':67, 't':71, 'u':73, 'v':79, 'w':83, 'x':89, 'y':97, 'z':101,
+        'A':2, 'B':3, 'C':5, 'D':7, 'E':11, 'F':13, 'G':17, 'H':19, 'I':23, 'J':29, 'K':31, 'L':37, 'M':41, 'N':43,
+        'O':47, 'P':53, 'Q':59, 'R':61, 'S':67, 'T':71, 'U':73, 'V':79, 'W':83, 'X':89, 'Y':97, 'Z':101
+    }
+
+
+def anagrams():
+    """
+        Anagrams - Find anagrams in a large file
+    """
+    anagram_map = {}
+    chunk_size = 1024
+    with open('anagram_file.txt', 'rb') as infile:
+        pattern = r"\S"
+        regex = re.compile(r'[a-zA-Z]+')
+        while(True):
+            data = infile.read(chunk_size)
+            if not data:
+                break
+            words = regex.findall(data)
+
+            for word in words:
+                anagram_num = reduce(lambda x,y: x*y, [code[c] for c in word])
+                if anagram_num in anagram_map:
+                    anagram_map[anagram_num].append(word)
+                else:
+                    anagram_map[anagram_num] = [word]
+
+    for v in anagram_map.itervalues():
+        if len(v) > 1:
+            print ', '.join(v)
+
+
 def main():
     '''
     print_matrix_horz()
@@ -171,9 +207,9 @@ def main():
     print_matrix_spiral()
     print_matrix_diagonal()
     print quicksort(array=[12,4,5,6,7,3,1,15])
-    '''
     quicksort_inplace()
-
+    '''
+    anagrams()
 
 if __name__ == "__main__":
     main()
