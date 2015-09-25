@@ -199,6 +199,25 @@ def anagrams():
         if len(v) > 1:
             print ', '.join(v)
 
+def regex_ip_address():
+	"""
+		Match an IP address
+		===================
+	"""
+	num = r"([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])"
+	pattern = r"^{0}\.{0}\.{0}\.{0}$".format(num)
+
+	regex = re.compile(pattern)
+	ip_addresses = ["255.255.255.255", "255.255.275.255", "255.255.255"]
+
+	for ip in ip_addresses:
+		match = regex.match(ip)
+		if match:
+			print "IS IP"
+		else:
+			print "NOT IP"
+
+
 
 def main():
     '''
@@ -208,8 +227,10 @@ def main():
     print_matrix_diagonal()
     print quicksort(array=[12,4,5,6,7,3,1,15])
     quicksort_inplace()
-    '''
     anagrams()
+    '''
+    regex_ip_address()
+
 
 if __name__ == "__main__":
     main()
