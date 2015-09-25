@@ -258,6 +258,55 @@ def cached_fib(num):
 	print "Fib %d = %d" % (num, fib1+fib2)
 	return fib1+fib2
 
+
+def regex_substitute():
+	"""
+		Square the numbers in string using re.sub()
+	"""
+	string = "1 2 3 4 5 6 7 8 9"
+	square = lambda match: str(int(match.group())**2)
+	result = re.sub(r'\d+', square, string)
+	print result
+
+
+def regex_substitute2():
+	'''
+		Question:
+		========
+		You are given a text of N lines. The text contains && and || symbols. 
+		Your task is to modify :
+		&& => and
+		|| => or
+		Both && and || should have space " " on both sides.
+		Input Format
+		First line contains integer, N. 
+		Next N lines contains the text.
+		Constraints
+		0<N<100
+		Neither && nor || occur in start or end of each line.
+	'''
+
+	strtext = """
+		a = 1;
+		b = input();
+		if a + b > 0 && a - b < 0:
+		    start()
+		elif a*b > 10 || a/b < 1:
+		    stop()
+		print set(list(a)) | set(list(b)) 
+		#Note do not change &&& or ||| or & or |
+		#Only change those '&&' which has space on both sides.
+		#Only change those '|| which has space on both sides.
+	"""
+	# Also works
+	#res = re.sub(r"(?<= )&&(?= )", ' and ', strtext)
+	#res = re.sub(r"\s{1}\|\|\s{1}", ' or ', strtext)
+
+	res = re.sub("(?<= )&&(?= )", "and", strtext)
+	res = re.sub("(?<= )\|\|(?= )", "or", res) # NOTE: | needs escaping unlike &
+	print res
+
+
 def main():
     '''
     print_matrix_horz()
@@ -269,9 +318,10 @@ def main():
     anagrams()
     regex_ip_address()
     regex_us_phone_nums()
-    '''
     print "Result = %d" % cached_fib(5)
-
+    regex_substitute()
+    regex_substitute2()
+    '''
 
 if __name__ == "__main__":
     main()
